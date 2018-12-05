@@ -34,7 +34,7 @@ export interface ThrottlerStats {
 interface TaskData<T, R> {
   task: T;
   retryCount: number;
-  wait?: { resolve: (R: any) => void; reject: (err: Error) => void };
+  wait?: { resolve: (value: R) => void; reject: (err: Error) => void };
 }
 
 export abstract class Throttler<T, R> {
