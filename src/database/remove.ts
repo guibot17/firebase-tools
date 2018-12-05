@@ -19,7 +19,7 @@ export default class DatabaseRemove {
   concurrency: number;
   retries: number;
   remote: RemoveRemote;
-  private jobStack: Stack<string>;
+  private jobStack: Stack<string, any>;
   private waitingPath: Map<string, number>;
 
   /**
@@ -35,7 +35,7 @@ export default class DatabaseRemove {
     this.retries = options.retries;
     this.remote = new RTDBRemoveRemote(options.instance);
     this.waitingPath = new Map();
-    this.jobStack = new Stack({
+    this.jobStack = new Stack<string, any>({
       name: "long delete stack",
       concurrency: this.concurrency,
       handler: this.chunkedDelete.bind(this),
